@@ -1,7 +1,9 @@
 "use client";
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth/web";   // IMPORTANT FIX
+
+import { auth, db } from "../firebase/config";
+   // IMPORTANT FIX
 import {
   signInAnonymously,
   signInWithCustomToken,
