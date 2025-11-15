@@ -1,7 +1,6 @@
-// Firebase core
+// ------------------ IMPORTS ------------------
 import { initializeApp } from "firebase/app";
 
-// Auth imports
 import {
   getAuth,
   signInAnonymously,
@@ -12,7 +11,6 @@ import {
   signOut,
 } from "firebase/auth";
 
-// Firestore imports
 import {
   getFirestore,
   doc,
@@ -31,10 +29,9 @@ import {
   setLogLevel,
 } from "firebase/firestore";
 
-// App ID
-const appId = typeof __app_id !== "undefined" ? __app_id : "hackathon-2026";
+// ------------------ CONFIG ------------------
+const appId = "hackathon-2026"; // fixed value
 
-// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCnjmFq0F9B3vK9gmVudKIeRGxyNGYltJ8",
   authDomain: "hackathon-99af7.firebaseapp.com",
@@ -44,55 +41,58 @@ const firebaseConfig = {
   appId: "1:57123565113:web:fc023e9cc28b1b06ee27e8",
 };
 
-let app;
-let auth;
-let db;
+// ------------------ INITIALIZE ------------------
+let app, auth, db;
 
 try {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
-  setLogLevel("Debug");
+  setLogLevel("debug");
 } catch (e) {
-  console.error("Error initializing Firebase:", e);
+  console.error("Firebase init error:", e);
 }
 
-const initialAuthToken =
-  typeof __initial_auth_token !== "undefined"
-    ? __initial_auth_token
-    : undefined;
-
-// Constants
+// ------------------ CONSTANTS ------------------
 const HACKATHON_NAME = "Hackathon 2026";
 const REGISTRATION_FEE = 2000;
 const MAX_TEAM_MEMBERS = 3;
 
-// Paths
+// ------------------ PATH FUNCTIONS ------------------
 const getTeamCollectionPath = () => `/artifacts/${appId}/public/data/teams`;
 const getTeamDocPath = (teamId) =>
   `/artifacts/${appId}/public/data/teams/${teamId}`;
+
 const getUserCollectionPath = () => `/artifacts/${appId}/public/data/users`;
 const getUserDocPath = (userId) =>
   `/artifacts/${appId}/public/data/users/${userId}`;
+
 const getR1MCQSubmissionsPath = (teamId) =>
   `/artifacts/${appId}/public/data/r1_mcq_submissions/${teamId}`;
+
 const getR1CodeSubmissionsPath = (teamId) =>
   `/artifacts/${appId}/public/data/r1_code_submissions/${teamId}`;
+
 const getR2SubmissionsPath = (teamId) =>
   `/artifacts/${appId}/public/data/r2_submissions/${teamId}`;
+
 const getConfigDocPath = () =>
   `/artifacts/${appId}/public/data/config/hackathon`;
 const getRoundConfigDocPath = () =>
   `/artifacts/${appId}/public/data/config/rounds`;
 
-// Exports
+// ------------------ EXPORTS ------------------
 export {
+  // Firebase Instances
   auth,
   db,
-  initialAuthToken,
+
+  // App constants
   HACKATHON_NAME,
   REGISTRATION_FEE,
   MAX_TEAM_MEMBERS,
+
+  // Firebase functions
   doc,
   getDoc,
   addDoc,
@@ -106,12 +106,16 @@ export {
   getDocs,
   writeBatch,
   serverTimestamp,
+
+  // Auth
   signInAnonymously,
   signInWithCustomToken,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+
+  // Paths
   getTeamCollectionPath,
   getTeamDocPath,
   getUserCollectionPath,
