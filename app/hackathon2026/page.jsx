@@ -1,17 +1,14 @@
 "use client";
 
 import { initializeApp } from "firebase/app";
+import { getAuth, 
+         signInAnonymously,
+         signInWithCustomToken,
+         onAuthStateChanged,
+         createUserWithEmailAndPassword,
+         signInWithEmailAndPassword,
+         signOut } from "firebase/auth";
 
-import { auth, db } from "../firebase/config";
-   // IMPORTANT FIX
-import {
-  signInAnonymously,
-  signInWithCustomToken,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
 import {
   getFirestore,
   doc,
@@ -26,8 +23,7 @@ import {
   where,
   getDocs,
   writeBatch,
-  serverTimestamp,
-  setLogLevel,
+  serverTimestamp
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -39,16 +35,14 @@ const firebaseConfig = {
   appId: "1:57123565113:web:fc023e9cc28b1b06ee27e8"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Auth + Firestore
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Auth + Firestore instances
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
+// Re-export Firebase functions
 export {
-  auth,
-  db,
   signInAnonymously,
   signInWithCustomToken,
   onAuthStateChanged,
