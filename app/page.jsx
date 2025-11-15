@@ -1,4 +1,6 @@
 // app/page.jsx
+"use client";
+
 
 // This imports the entire Hackathon app from your subfolder
 import HackathonApp from './hackathon2026/page';
